@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opdracht 1</title>
+<style>
+  :root {
+    --bg: #fdfaf3;
+    --fg: #1d1d1f;
+    --muted: #55534e;
+    --card: #ffffff;
+    --line: #e4ded0;
+    --accent: #e8590c;
+    --ster: #f5a700;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.4;
+  }
+  main { max-width: 1100px; margin: 0 auto; padding: 1.2em 16px 2em; }
+  h1 { font-size: 2.4em; margin: 0 0 .5em; line-height: 1.1; color: var(--accent); }
+  .sub { color: var(--muted); margin: 0 0 .2em; }
+  section {
+    background: var(--card);
+    border: 2px solid var(--line);
+    border-left: .4em solid var(--accent);
+    border-radius: .6em;
+    margin: 0 0 .7em;
+    padding: .6em 1em .7em;
+    break-inside: avoid;
+  }
+  section.opdracht { border-width: 3px; border-color: var(--accent); border-left-width: .4em; }
+  section.opdracht p { font-size: 1.35em; font-weight: 700; }
+  section.uitdaging { border-left-color: var(--ster); }
+  h2 {
+    font-size: .8em; margin: 0 0 .3em; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .05em;
+    display: flex; justify-content: space-between; gap: .8em; flex-wrap: wrap;
+  }
+  .sterren { color: var(--ster); font-size: 1.6em; letter-spacing: .1em; line-height: 1; text-transform: none; }
+  p { margin: 0; }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17171a; --fg: #f2f2f2; --muted: #b5b3ad;
+      --card: #222226; --line: #3a3a40; --accent: #ff8a3d; --ster: #ffc233;
+    }
+  }
+  @media print {
+    @page { size: A4; margin: 18mm; }
+    :root {
+      --bg: #fff; --fg: #1d1d1f; --muted: #55534e;
+      --card: #fff; --line: #e4ded0; --accent: #e8590c; --ster: #f5a700;
+    }
+    body { font-size: 18pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    main { max-width: none; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <p class="sub">BrakeOut Scratch workshop</p>
+  <h1>Opdracht 1</h1>
+
+  <section class="opdracht">
+    <h2>Jouw opdracht</h2>
+    <p>Laat Denzel, Steven of Stijn een salto maken.</p>
+  </section>
+
+    <section class="uitdaging">
+      <h2><span>Extra uitdaging</span><span class="sterren" aria-label="1 ster">★</span></h2>
+      <p>Laat ze iets roepen na de salto.</p>
+    </section>
+</main>
+</body>
+</html>

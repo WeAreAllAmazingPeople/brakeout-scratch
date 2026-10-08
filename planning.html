@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BrakeOut planning</title>
+<style>
+  :root {
+    --bg: #fdfaf3;
+    --fg: #1d1d1f;
+    --muted: #55534e;
+    --card: #ffffff;
+    --line: #e4ded0;
+    --accent: #e8590c;
+    --pause: #2f9e44;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.4;
+  }
+  main { max-width: 1100px; margin: 0 auto; padding: 1.2em 16px 2em; }
+  h1 { font-size: 2em; margin: 0 0 .15em; line-height: 1.1; }
+  .sub { color: var(--muted); margin: 0 0 1.2em; }
+  .controls { margin-bottom: .8em; display: flex; gap: .5em; flex-wrap: wrap; }
+  button {
+    font: inherit; font-size: .75em; padding: .35em .9em; cursor: pointer;
+    border: 2px solid var(--line); background: var(--card); color: var(--fg); border-radius: .5em;
+  }
+  button:hover { border-color: var(--accent); }
+  details {
+    background: var(--card);
+    border: 2px solid var(--line);
+    border-left: .4em solid var(--accent);
+    border-radius: .6em;
+    margin: 0 0 .6em;
+  }
+  details.pauze { border-left-color: var(--pause); }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    padding: .6em .9em;
+    display: flex;
+    align-items: baseline;
+    gap: .8em;
+    flex-wrap: wrap;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: "▸";
+    color: var(--accent);
+    transition: transform .15s;
+    display: inline-block;
+  }
+  details[open] summary::before { transform: rotate(90deg); }
+  .tijd { font-weight: 700; font-variant-numeric: tabular-nums; min-width: 6.5em; }
+  .titel { font-weight: 700; flex: 1; }
+  .duur {
+    font-size: .75em; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 1em; padding: .05em .7em;
+  }
+  .inhoud { padding: 0 1.2em .8em 2.6em; }
+  .inhoud ul { margin: 0; padding-left: 1.1em; }
+  .inhoud li { margin: .2em 0; }
+  .inhoud h2 { font-size: 1em; margin: .8em 0 .3em; color: var(--accent); }
+  .inhoud ul ul { margin-top: .2em; }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17171a; --fg: #f2f2f2; --muted: #b5b3ad;
+      --card: #222226; --line: #3a3a40; --accent: #ff8a3d; --pause: #51cf66;
+    }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>BrakeOut Scratch workshop</h1>
+  <p class="sub">Planning voor vandaag</p>
+
+  <div class="controls">
+    <button type="button" onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">Alles openklappen</button>
+    <button type="button" onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">Alles dichtklappen</button>
+  </div>
+
+  <details>
+    <summary><span class="tijd">13u30</span><span class="titel">Start</span><span class="duur">Groene Zaal</span></summary>
+    <div class="inhoud">
+      <ul><li>We beginnen eraan, samen in de <strong>Groene Zaal</strong>.</li></ul>
+      <h2>Belangrijkste privacy- en deelregels</h2>
+      <ul>
+        <li><strong>Code en bestanden zijn zichtbaar:</strong> Iedereen kan op 'See inside' (Bekijk van binnen) klikken om je scripts, geluiden, afbeeldingen en variabelen te bekijken.</li>
+        <li><strong>Remix-cultuur:</strong> Anderen mogen je creaties hergebruiken en aanpassen (remixen)</li>
+        <li><strong>Geen persoonlijke informatie:</strong> Je mag nooit persoonlijke gegevens delen in je projecten, opmerkingen, profiel of studio's. Dit geldt voor:
+          <ul>
+            <li>Je volledige naam</li>
+            <li>Je fysieke adres</li>
+            <li>Je e-mailadres</li>
+            <li>Je telefoonnummer</li>
+          </ul>
+        </li>
+        <li><strong>Accountbeveiliging:</strong> Deel je wachtwoord nooit met anderen.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="tijd">13u30 – 14u40</span><span class="titel">Theorie 8x ... + 4 oefeningen</span><span class="duur">70 min</span></summary>
+    <div class="inhoud"><ul>
+      <li>Theorie 8x ... (samen in de Groene Zaal)</li>
+      <li>Na de theorie splitsen we op in 2 groepen / 2 zalen</li>
+      <li>4 oefeningen: actief hé 😉</li>
+    </ul></div>
+  </details>
+
+  <details class="pauze">
+    <summary><span class="tijd">14u40 – 14u50</span><span class="titel">Pauze</span><span class="duur">10 min</span></summary>
+    <div class="inhoud"><ul><li>10 minuten pauze</li></ul></div>
+  </details>
+
+  <details>
+    <summary><span class="tijd">14u50 – 15u30</span><span class="titel">Codeer jouw verhaal</span><span class="duur">40 min</span></summary>
+    <div class="inhoud"><ul><li>Duur: 40 minuten</li></ul></div>
+  </details>
+
+  <details>
+    <summary><span class="tijd">15u30</span><span class="titel">Check-out &amp; demo's</span></summary>
+    <div class="inhoud"><ul>
+      <li>Check-out</li>
+      <li>Demo's</li>
+    </ul></div>
+  </details>
+</main>
+</body>
+</html>

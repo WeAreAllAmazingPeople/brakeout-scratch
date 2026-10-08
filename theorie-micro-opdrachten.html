@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorie micro-opdrachten</title>
+<style>
+  :root {
+    --bg: #fdfaf3;
+    --fg: #1d1d1f;
+    --muted: #55534e;
+    --card: #ffffff;
+    --line: #e4ded0;
+    --accent: #e8590c;
+    --ster: #f5a700;
+    --code-bg: #f1ecdf;
+    --kern-bg: #fff3e8;
+    --uit-bg: #fff8e1;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: clamp(16px, 1.4vw, 20px);
+    line-height: 1.5;
+  }
+  main { max-width: 900px; margin: 0 auto; padding: 1.2em 16px 2em; }
+  h1 { font-size: 2.1em; margin: 0 0 .6em; line-height: 1.15; color: var(--accent); }
+  .sub { color: var(--muted); margin: 0 0 .2em; }
+  section.level2 {
+    background: var(--card);
+    border: 2px solid var(--line);
+    border-left: .4em solid var(--accent);
+    border-radius: .6em;
+    margin: 0 0 1em;
+    padding: .8em 1.2em 1em;
+  }
+  h2 { font-size: 1.35em; margin: 0 0 .5em; color: var(--accent); line-height: 1.2; }
+  p { margin: .5em 0; }
+  ul, ol { margin: .4em 0; padding-left: 1.4em; }
+  li { margin: .2em 0; }
+  code {
+    background: var(--code-bg);
+    border-radius: .35em;
+    padding: .05em .4em;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .88em;
+    white-space: normal;
+  }
+  blockquote {
+    margin: .7em 0; padding: .4em .9em;
+    border-left: .25em solid var(--line); color: var(--muted);
+  }
+  table { border-collapse: collapse; width: 100%; margin: .6em 0; font-size: .92em; }
+  th, td { border: 1px solid var(--line); padding: .4em .55em; text-align: left; vertical-align: top; }
+  th { background: var(--code-bg); }
+  p.kern { background: var(--kern-bg); border-radius: .4em; padding: .5em .8em; }
+  p.uitdaging {
+    background: var(--uit-bg); border-left: .3em solid var(--ster);
+    border-radius: .4em; padding: .5em .8em;
+  }
+  .sterren { color: var(--ster); }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17171a; --fg: #f2f2f2; --muted: #b5b3ad;
+      --card: #222226; --line: #3a3a40; --accent: #ff8a3d; --ster: #ffc233;
+      --code-bg: #2e2e34; --kern-bg: #33261c; --uit-bg: #332d18;
+    }
+  }
+  @media print {
+    @page { size: A4; margin: 15mm; }
+    :root {
+      --bg: #fff; --fg: #1d1d1f; --muted: #55534e;
+      --card: #fff; --line: #e4ded0; --accent: #e8590c; --ster: #f5a700;
+      --code-bg: #f1ecdf; --kern-bg: #fff3e8; --uit-bg: #fff8e1;
+    }
+    body { font-size: 11pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    main { max-width: none; padding: 0; }
+    section.micro { break-before: page; }
+    p.kern, p.uitdaging, table, li { break-inside: avoid; }
+    h2 { break-after: avoid; }
+  }
+  figure.foto { margin: .8em 0; }
+  figure.foto img { display: block; max-width: 100%; height: auto; border-radius: .5em; border: 2px solid var(--line); }
+  figure.foto figcaption { color: var(--muted); font-size: .85em; margin-top: .3em; }
+  p.video a { color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+<section id="theorie-8-micro-opdrachten-in-de-ruimte-" class="level1">
+<p class="sub">BrakeOut Scratch workshop</p>
+<h1>Theorie: 8 micro-opdrachten in de ruimte 🚀</h1>
+<section id="ter-ere-van-margaret-hamilton" class="level2">
+<h2>Ter ere van Margaret Hamilton</h2>
+<p>We maken vandaag alles in een ruimtethema, ter ere van
+<strong>Margaret Hamilton</strong>. Zij leidde aan MIT het team dat de
+software schreef voor de boordcomputer van de Apollo-maanmissies.
+Tijdens de maanlanding van Apollo 11 in 1969 gaf de computer plots
+alarmen, maar haar software was zo slim gebouwd dat hij gewoon het
+belangrijkste werk bleef doen. Zo kon de landing doorgaan.</p>
+<p>Wat zij deed met heel veel code, doen wij vandaag met blokjes: een
+computer stap voor stap vertellen wat hij moet doen.</p>
+<figure class="foto">
+<img src="https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/201608/margaret-hamilton-mit-apollo-code_0.jpg?itok=gcN5sX1_" alt="Margaret Hamilton naast een stapel uitgeprinte code van de Apollo-software">
+<figcaption>Margaret Hamilton naast de code van de Apollo-software. Foto: MIT</figcaption>
+</figure>
+<p class="video">🎬 <a href="https://www.youtube.com/watch?v=4cOhZy7dhTo" target="_blank" rel="noopener">Bekijk de video over Apollo 11</a></p>
+</section>
+<section id="hoe-werkt-het" class="level2">
+<h2>Hoe werkt het?</h2>
+<ul>
+<li>De lesgever doet elke micro-opdracht <strong>live</strong> voor op
+het grote scherm.</li>
+<li>De deelnemers bouwen <strong>tegelijk</strong> mee op hun eigen
+computer.</li>
+<li>Elke micro-opdracht leert <strong>één nieuw concept</strong>. Blijf
+het vorige project gebruiken, zo groeit één ruimteproject stap voor
+stap.</li>
+<li>Wie sneller klaar is, probeert de <strong>extra uitdaging
+(★)</strong>.</li>
+</ul>
+<p><strong>Richttijd:</strong> ongeveer 30 minuten in totaal (4 min UI +
+8 × 3 à 4 min). Zo blijft er ruim tijd over voor de 4 oefeningen binnen
+het blok van 70 minuten.</p>
+<blockquote>
+<p>Tip: blokken heten in Scratch soms net iets anders afhankelijk van de
+versie. Toon telkens de <strong>kleur</strong> van de categorie, dan
+vinden de deelnemers het blok sneller.</p>
+</blockquote>
+
+</section>
+<section data-m id="m0-scratch-ui-verkennen--4-min" class="level2 micro">
+<h2>0. Scratch UI verkennen (± 4 min)</h2>
+<p>Open een nieuw project (<strong>Maak</strong> /
+<strong>Create</strong>) en wijs elk deel aan:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Deel</th>
+<th>Waar</th>
+<th>Wat doet het?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Podium</strong></td>
+<td>rechtsboven</td>
+<td>Hier gebeurt alles: je ziet je project spelen. Midden = x: 0, y: 0.
+Links/rechts loopt x van -240 tot 240, onder/boven loopt y van -180 tot
+180.</td>
+</tr>
+<tr class="even">
+<td><strong>Groene vlag / stopbord</strong></td>
+<td>boven het podium</td>
+<td>Groene vlag start het project, het rode stopbord stopt alles.</td>
+</tr>
+<tr class="odd">
+<td><strong>Spriteslijst</strong></td>
+<td>onder het podium</td>
+<td>Alle figuurtjes (sprites) in je project. Klik op een sprite om zijn
+scripts te zien. Rechtsonder: nieuwe sprite kiezen.</td>
+</tr>
+<tr class="even">
+<td><strong>Achtergronden</strong></td>
+<td>helemaal rechtsonder</td>
+<td>Hier kies je de achtergrond van het podium.</td>
+</tr>
+<tr class="odd">
+<td><strong>Blokpaletten</strong></td>
+<td>links</td>
+<td>De blokken, per kleur gesorteerd: Beweging, Uiterlijken, Geluid,
+Gebeurtenissen, Besturen, Waarnemen, Functies, Variabelen.</td>
+</tr>
+<tr class="even">
+<td><strong>Scriptgebied</strong></td>
+<td>midden</td>
+<td>Hier sleep je blokken naartoe en klik je ze aan elkaar.</td>
+</tr>
+<tr class="odd">
+<td><strong>Tabbladen Code / Uiterlijken / Geluiden</strong></td>
+<td>linksboven</td>
+<td>Wissel tussen de code, de kostuums (uiterlijken) en de geluiden van
+de geselecteerde sprite.</td>
+</tr>
+</tbody>
+</table>
+<p>Laat ook even zien:</p>
+<ul>
+<li>Blok in het scriptgebied <strong>slepen</strong>,
+<strong>vastklikken</strong> en terug naar links slepen om te
+<strong>verwijderen</strong>.</li>
+<li>Op een blok <strong>klikken</strong> om het meteen uit te
+proberen.</li>
+<li>De kat (Sprite1) verwijderen: rechtsklik →
+<strong>verwijder</strong>. We gaan de ruimte in!</li>
+</ul>
+
+</section>
+<section data-m id="m1-lancering-" class="level2 micro">
+<h2>1. Lancering! 🚀</h2>
+<p><strong>Concept:</strong> sequentie (opdrachten worden één na één
+uitgevoerd, van boven naar onder)</p>
+<p><strong>Sprites / achtergrond:</strong></p>
+<ul>
+<li>Sprite <strong>Rocketship</strong> (categorie <em>Ruimte</em>)</li>
+<li>Achtergrond <strong>Stars</strong> (of een andere
+ruimteachtergrond)</li>
+</ul>
+<p><strong>Blokken:</strong></p>
+<ul>
+<li><code>wanneer op groene vlag wordt geklikt</code>
+(Gebeurtenissen)</li>
+<li><code>ga naar x: 0 y: -130</code> (Beweging)</li>
+<li><code>wacht 1 sec.</code> (Besturen)</li>
+<li><code>schuif in 2 sec. naar x: 0 y: 150</code> (Beweging)</li>
+</ul>
+<p><strong>Stap voor stap (lesgever):</strong></p>
+<ol type="1">
+<li>Voeg de sprite <strong>Rocketship</strong> en de achtergrond
+<strong>Stars</strong> toe.</li>
+<li>Sleep <code>wanneer op groene vlag wordt geklikt</code> in het
+scriptgebied: "Dit is het startblok, hier begint alles."</li>
+<li>Klik <code>ga naar x: 0 y: -130</code> eronder: de raket staat klaar
+op het lanceerplatform.</li>
+<li>Daaronder <code>wacht 1 sec.</code></li>
+<li>Daaronder <code>schuif in 2 sec. naar x: 0 y: 150</code>.</li>
+<li>Klik op de groene vlag. Wat gebeurt er? En als je de blokken in een
+andere volgorde zet?</li>
+</ol>
+<p class="kern"><strong>Kernboodschap:</strong> de computer doet precies wat je
+vraagt, in de volgorde die jij bepaalt.</p>
+<p class="uitdaging"><strong>Extra uitdaging <span class="sterren">★</span></strong><br> laat de raket eerst naar links
+schuiven en daarna pas omhoog vliegen.</p>
+
+</section>
+<section data-m id="m2-vlammen-en-stapjes-" class="level2 micro">
+<h2>2. Vlammen en stapjes 🔥</h2>
+<p><strong>Concept:</strong> herhalen (lussen)</p>
+<p><strong>Sprites / achtergrond:</strong> dezelfde raket en
+achtergrond</p>
+<p><strong>Blokken:</strong></p>
+<ul>
+<li><code>herhaal 10 keer</code> (Besturen)</li>
+<li><code>verander y met 15</code> (Beweging)</li>
+<li><code>volgend uiterlijk</code> (Uiterlijken)</li>
+<li><code>wacht 0.1 sec.</code> (Besturen)</li>
+</ul>
+<p><strong>Stap voor stap (lesgever):</strong></p>
+<ol type="1">
+<li>Toon het tabblad <strong>Uiterlijken</strong> van de raket: de raket
+heeft meerdere kostuums, sommige met vlammen.</li>
+<li>Vervang <code>schuif in 2 sec. naar ...</code> door een
+<code>herhaal 10 keer</code>-blok.</li>
+<li>Zet in de herhaling: <code>verander y met 15</code>,
+<code>volgend uiterlijk</code>, <code>wacht 0.1 sec.</code></li>
+<li>Groene vlag: de raket stijgt in stapjes en de vlammen
+flikkeren.</li>
+<li>Vraag: "Hoeveel blokken hadden we nodig zonder herhaal-blok?"
+(30!)</li>
+</ol>
+<p class="kern"><strong>Kernboodschap:</strong> met een lus laat je de computer
+hetzelfde vaak doen, zonder dat je alles opnieuw moet schrijven.</p>
+<p class="uitdaging"><strong>Extra uitdaging <span class="sterren">★</span></strong><br> voeg de sprite
+<strong>Planet2</strong> toe en gebruik <code>herhaal</code> (altijd)
+met <code>draai 15 graden</code> om de planeet eindeloos te laten
+draaien.</p>
+
+</section>
+<section data-m id="m3-van-de-aarde-naar-de-ruimte-" class="level2 micro">
+<h2>3. Van de aarde naar de ruimte 🌍</h2>
+<p><strong>Concept:</strong> uiterlijken, achtergronden en grootte
+(Looks)</p>
+<p><strong>Sprites / achtergrond:</strong></p>
+<ul>
+<li>Raket</li>
+<li>Twee achtergronden: een op aarde (bv. <strong>Space City 1</strong>
+of een buitenachtergrond) en <strong>Stars</strong></li>
+</ul>
+<p><strong>Blokken:</strong></p>
+<ul>
+<li><code>verander achtergrond naar ...</code> (Uiterlijken)</li>
+<li><code>zeg 3, 2, 1... Lancering! gedurende 2 sec.</code>
+(Uiterlijken)</li>
+<li><code>maak grootte 100 %</code> en
+<code>verander grootte met -5</code> (Uiterlijken)</li>
+</ul>
+<p><strong>Stap voor stap (lesgever):</strong></p>
+<ol type="1">
+<li>Voeg een tweede achtergrond toe (een op aarde).</li>
+<li>Bovenaan het script, na de groene vlag:
+<code>verander achtergrond naar</code> <em>(aarde)</em> en
+<code>maak grootte 100 %</code>.</li>
+<li>Voor de lus:
+<code>zeg 3, 2, 1... Lancering! gedurende 2 sec.</code></li>
+<li>In de herhaling: <code>verander grootte met -5</code>. De raket
+wordt kleiner, alsof hij ver weg vliegt.</li>
+<li>Na de herhaling: <code>verander achtergrond naar Stars</code>.</li>
+<li>Vraag: "Waarom zetten we de grootte en de achtergrond eerst terug
+bij de start?"</li>
+</ol>
+<p class="kern"><strong>Kernboodschap:</strong> met uiterlijken verander je hoe iets
+eruitziet, niet waar het staat. Goed starten = alles terugzetten bij de
+groene vlag.</p>
+<p class="uitdaging"><strong>Extra uitdaging <span class="sterren">★</span></strong><br> laat de raket op het einde
+verdwijnen met <code>verdwijn</code> en bij de start weer verschijnen
+met <code>verschijn</code>.</p>
+
+</section>
+<section data-m id="m4-stuur-je-raket-" class="level2 micro">
+<h2>4. Stuur je raket 🎮</h2>
+<p><strong>Concept:</strong> gebeurtenissen (toetsen en klikken)</p>
+<p><strong>Sprites / achtergrond:</strong> raket, achtergrond
+<strong>Stars</strong></p>
+<p><strong>Blokken:</strong></p>
+<ul>
+<li><code>wanneer [pijltje rechts] is ingedrukt</code>
+(Gebeurtenissen)</li>
+<li><code>wanneer [pijltje links] is ingedrukt</code>,
+<code>... pijltje omhoog ...</code>,
+<code>... pijltje omlaag ...</code></li>
+<li><code>verander x met 10</code> / <code>verander x met -10</code>
+(Beweging)</li>
+<li><code>verander y met 10</code> / <code>verander y met -10</code>
+(Beweging)</li>
+<li><code>wanneer op deze sprite wordt geklikt</code>
+(Gebeurtenissen)</li>
+</ul>
+<p><strong>Stap voor stap (lesgever):</strong></p>
+<ol type="1">
+<li>Sleep <code>wanneer [spatiebalk] is ingedrukt</code> in het
+scriptgebied, kies <strong>pijltje rechts</strong>.</li>
+<li>Eronder <code>verander x met 10</code>. Probeer: druk op pijltje
+rechts.</li>
+<li>Dupliceer (rechtsklik → <strong>kopiëren</strong>) en maak links
+(<code>-10</code>), omhoog (<code>y</code> met <code>10</code>) en
+omlaag (<code>y</code> met <code>-10</code>).</li>
+<li>Toon dat je <strong>meerdere scripts</strong> tegelijk kan hebben in
+één sprite: elk start bij een andere gebeurtenis.</li>
+<li>Bonus: <code>wanneer op deze sprite wordt geklikt</code> →
+<code>zeg Hallo, aarde! gedurende 2 sec.</code></li>
+</ol>
+<p class="kern"><strong>Kernboodschap:</strong> een script start niet altijd met de
+groene vlag. Het kan ook starten als <em>iets gebeurt</em>.</p>
+<p class="uitdaging"><strong>Extra uitdaging <span class="sterren">★</span></strong><br> laat de raket ook in de juiste
+richting kijken met <code>richt naar 90 graden</code> (rechts) en
+<code>richt naar -90 graden</code> (links).</p>
+
+</section>
+<section data-m id="m5-motorgeluid-en-aftellen-met-je-stem-" class="level2 micro">
+<h2>5. Motorgeluid en aftellen met je stem 🔊</h2>
+<p><strong>Concept:</strong> geluid (afspelen en opnemen)</p>
+<p><strong>Sprites / achtergrond:</strong> raket, achtergrond
+<strong>Stars</strong></p>
+<p><strong>Blokken:</strong></p>
+<ul>
+<li><code>start geluid ...</code> (Geluid)</li>
+<li><code>start geluid ... en wacht</code> (Geluid)</li>
+</ul>
+<p><strong>Stap voor stap (lesgever):</strong></p>
+<ol type="1">
+<li>Open het tabblad <strong>Geluiden</strong> van de raket en kies een
+geluid uit de bibliotheek (bv. zoek op <em>space</em> of
+<em>laser</em>).</li>
+<li>Zet <code>start geluid ...</code> vlak voor de lus waarin de raket
+stijgt.</li>
+<li>Neem een eigen geluid op: tabblad <strong>Geluiden</strong> →
+<strong>Opnemen</strong> → "3, 2, 1, lancering!"</li>
+<li>Zet <code>start geluid (opname) en wacht</code> vóór de
+lancering.</li>
+<li>Vergelijk: wat is het verschil tussen <strong>start geluid</strong>
+en <strong>start geluid en wacht</strong>? (Wacht de raket wel of niet
+tot het geluid gedaan is?)</li>
+</ol>
+<p class="kern"><strong>Kernboodschap:</strong> sommige blokken wachten tot ze klaar
+zijn, andere niet. Dat bepaalt wat er <em>tegelijk</em> gebeurt.</p>
+<p class="uitdaging"><strong>Extra uitdaging <span class="sterren">★</span></strong><br> gebruik
+<code>verander toonhoogte-effect met 10</code> in de lus, zodat de motor
+steeds hoger klinkt.</p>
+
+</section>
+<section data-m id="m6-klaar-voor-lancering-" class="level2 micro">
+<h2>6. Klaar voor lancering? ✅</h2>
+<p><strong>Concept:</strong> voorwaarden (als ... dan ... anders) en
+vragen stellen</p>
+<p><strong>Sprites / achtergrond:</strong> raket, achtergrond
+<strong>Stars</strong></p>
+<p><strong>Blokken:</strong></p>
+<ul>
+<li><code>vraag Klaar voor lancering? (ja/nee) en wacht</code>
+(Waarnemen)</li>
+<li><code>antwoord</code> (Waarnemen)</li>
+<li><code>( ) = ( )</code> (Functies)</li>
+<li><code>als &lt; &gt; dan ... anders</code> (Besturen)</li>
+</ul>
+<p><strong>Stap voor stap (lesgever):</strong></p>
+<ol type="1">
+<li>Na de groene vlag en de startpositie:
+<code>vraag Klaar voor lancering? (ja/nee) en wacht</code>.</li>
+<li>Sleep <code>als &lt; &gt; dan ... anders</code> eronder.</li>
+<li>In de voorwaarde: <code>antwoord = ja</code> (sleep
+<code>antwoord</code> in het linkervakje, typ <code>ja</code>
+rechts).</li>
+<li>Sleep het hele lanceer-deel (geluid + lus) in het
+<strong>dan</strong>-gedeelte.</li>
+<li>In het <strong>anders</strong>-gedeelte:
+<code>zeg Missie uitgesteld! gedurende 2 sec.</code></li>
+<li>Test met <em>ja</em> en met <em>nee</em>.</li>
+</ol>
+<p class="kern"><strong>Kernboodschap:</strong> met een voorwaarde kiest de computer
+zelf wat hij doet, afhankelijk van een situatie of antwoord.</p>
+<p class="uitdaging"><strong>Extra uitdaging <span class="sterren">★</span></strong><br> voeg de sprite
+<strong>Planet2</strong> toe. Zet in de raket <code>herhaal</code>
+(altijd) met <code>als &lt;raak ik Planet2?&gt; dan zeg Geland!</code>.
+Stuur de raket met de pijltjes naar de planeet.</p>
+
+</section>
+<section data-m id="m7-het-aftelklokje-️" class="level2 micro">
+<h2>7. Het aftelklokje ⏱️</h2>
+<p><strong>Concept:</strong> variabelen (iets onthouden dat kan
+veranderen)</p>
+<p><strong>Sprites / achtergrond:</strong> raket, achtergrond
+<strong>Stars</strong></p>
+<p><strong>Blokken:</strong></p>
+<ul>
+<li><strong>Maak een variabele</strong> → <code>aftellen</code>
+(Variabelen)</li>
+<li><code>maak aftellen 10</code> (Variabelen)</li>
+<li><code>verander aftellen met -1</code> (Variabelen)</li>
+<li><code>zeg (aftellen) gedurende 1 sec.</code> (Uiterlijken)</li>
+<li><code>herhaal 10 keer</code> (Besturen)</li>
+</ul>
+<p><strong>Stap voor stap (lesgever):</strong></p>
+<ol type="1">
+<li>Klik bij <strong>Variabelen</strong> op <strong>Maak een
+variabele</strong>, noem ze <code>aftellen</code>. Toon dat ze op het
+podium verschijnt.</li>
+<li>Vóór de lancering: <code>maak aftellen 10</code>.</li>
+<li>Daaronder <code>herhaal 10 keer</code> met daarin:
+<code>zeg (aftellen) gedurende 1 sec.</code> en
+<code>verander aftellen met -1</code>.</li>
+<li>Daarna de lancering zoals voorheen.</li>
+<li>Vraag: "Wat zit er nu in de variabele na het aftellen?" (0)</li>
+</ol>
+<p class="kern"><strong>Kernboodschap:</strong> een variabele is een doosje met een
+naam waarin de computer een waarde onthoudt. Die waarde kan je
+veranderen.</p>
+<p class="uitdaging"><strong>Extra uitdaging <span class="sterren">★</span></strong><br> maak een variabele
+<code>brandstof</code> die start op 100 en bij elke stap van de raket
+met 1 daalt. Als <code>brandstof = 0</code>, zegt de raket "Tank leeg!"
+en <code>stop alle</code>.</p>
+
+</section>
+<section data-m id="m8-mission-control-zegt-go-" class="level2 micro">
+<h2>8. Mission Control zegt: GO! 📡</h2>
+<p><strong>Concept:</strong> berichten (sprites laten samenwerken met
+signalen)</p>
+<p><strong>Sprites / achtergrond:</strong></p>
+<ul>
+<li>Raket</li>
+<li>Een tweede sprite als <strong>Mission Control</strong> (bv.
+<strong>Ripley</strong>, <strong>Robot</strong> of een andere
+figuur)</li>
+<li>Achtergrond op aarde + <strong>Stars</strong></li>
+</ul>
+<p><strong>Blokken:</strong></p>
+<ul>
+<li><code>zend signaal lancering</code> (Gebeurtenissen)</li>
+<li><code>wanneer ik signaal lancering ontvang</code>
+(Gebeurtenissen)</li>
+</ul>
+<p><strong>Stap voor stap (lesgever):</strong></p>
+<ol type="1">
+<li>Voeg de sprite <strong>Mission Control</strong> toe.</li>
+<li>Bij Mission Control:
+<code>wanneer op groene vlag wordt geklikt</code> →
+<code>zeg Alle systemen zijn klaar. gedurende 2 sec.</code> →
+<code>zend signaal</code> → kies <strong>Nieuw bericht</strong> →
+<code>lancering</code>.</li>
+<li>Bij de raket: vervang de groene vlag van het lanceerscript door
+<code>wanneer ik signaal lancering ontvang</code>. (Het klaarzetten met
+<code>ga naar ...</code> en <code>maak grootte 100 %</code> blijft bij
+de groene vlag.)</li>
+<li>Groene vlag: Mission Control geeft het signaal, de raket
+vertrekt.</li>
+<li>Toon dat ook de <strong>achtergrond</strong> een signaal kan
+ontvangen: bv. <code>wanneer ik signaal lancering ontvang</code> →
+<code>verander achtergrond naar Stars</code>.</li>
+</ol>
+<p class="kern"><strong>Kernboodschap:</strong> met signalen kunnen sprites met
+elkaar praten. Zo maak je een verhaal waarin verschillende figuren na
+elkaar iets doen. Handig voor <strong>Codeer jouw verhaal</strong>!</p>
+<p class="uitdaging"><strong>Extra uitdaging <span class="sterren">★</span></strong><br> laat de raket na de landing een
+signaal <code>geland</code> sturen, waarop Mission Control antwoordt met
+"Welkom op de maan!".</p>
+
+</section>
+<section id="overzicht" class="level2">
+<h2>Overzicht</h2>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Micro-opdracht</th>
+<th>Concept</th>
+<th>Nieuwe blokken</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>Scratch UI verkennen</td>
+<td>de werkomgeving</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Lancering!</td>
+<td>sequentie</td>
+<td>groene vlag, ga naar, wacht, schuif</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Vlammen en stapjes</td>
+<td>herhalen</td>
+<td>herhaal … keer, verander y, volgend uiterlijk</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Van de aarde naar de ruimte</td>
+<td>uiterlijken &amp; achtergronden</td>
+<td>verander achtergrond, zeg, grootte</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Stuur je raket</td>
+<td>gebeurtenissen</td>
+<td>wanneer toets ingedrukt, wanneer sprite geklikt</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Motorgeluid en aftellen met je stem</td>
+<td>geluid</td>
+<td>start geluid (en wacht), opnemen</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>Klaar voor lancering?</td>
+<td>voorwaarden</td>
+<td>vraag, antwoord, =, als … dan … anders</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>Het aftelklokje</td>
+<td>variabelen</td>
+<td>maak variabele, maak … , verander … met</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>Mission Control zegt: GO!</td>
+<td>berichten</td>
+<td>zend signaal, wanneer ik signaal ontvang</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Link met de 4 oefeningen:</strong> beweging en uiterlijken
+(opdracht 1 en 2), toetsen (opdracht 2 ★), zeggen, stem opnemen en
+vragen met voorwaarden (opdracht 3) en geluid (opdracht 4) komen
+allemaal al in de micro-opdrachten aan bod.</p>
+</section>
+</section>
+
+</main>
+</body>
+</html>
